@@ -4,10 +4,8 @@ public class Player {
     private Deck win_deck;
 
     public Player(String name){
-    Deck draw_deck = new Deck();
-    Deck win_deck = new Deck();
-    this.draw_deck = draw_deck;
-    this.win_deck = win_deck;
+        this.draw_deck = new Deck(false);
+        this.win_deck = new Deck(false);
     }
     public String toString() {
         return this.name;
