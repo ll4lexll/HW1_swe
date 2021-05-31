@@ -2,22 +2,22 @@ public enum Shape {
     /* enum for cards shape */
     Spades(){
         public String toString() {
-            return toString("♠");
+            return "♠";
         }
-    }
-    Spades(){
+    },
+    Diamonds(){
         public String toString() {
-            return toString("♠");
+            return "♦";
         }
-    }
-    Spades(){
+    },
+    Clubs(){
         public String toString() {
-            return toString("♠");
+            return "♣";
         }
-    }
-    Spades(){
+    },
+    Hearts(){
         public String toString() {
-            return toString("♠");
+            return "♥";
         }
     }
 
