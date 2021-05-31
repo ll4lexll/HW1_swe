@@ -1,4 +1,4 @@
-import java.util.ArrayList;
+
 
 public class Card {
     private int value;
@@ -11,20 +11,20 @@ public class Card {
     public int getValue(){
         return this.value;
     }
-    public Void setValue(int value){
+    public void setValue(int value){
         this.value = value;
     }
     public Shape getShape() {
         return this.s;
     }
-    public Void setShape(Shape s){
+    public void setShape(Shape s){
         this.s = s;
     }
 
     public int compare (Card other){ //Compares this Card to another
         if(this.getValue() < other.getValue()) return -1;
         if(this.getValue() == other.getValue()) return 0;
-        if(this.getValue() > other.getValue()) return 1;
+        return 1;
     }
     public String toString(){ //return the value and shape as a String
         String type = this.getShape().toString();
