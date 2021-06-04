@@ -31,6 +31,9 @@ public class Deck {
     public void addCard(Card card){
         this.cards.add(card);
     }
+    public ArrayList<Card> get_cardsArray(){
+        return this.cards;
+    }
     public Card removeTopCard(){
         return this.cards.remove(this.cards.size() - 1);
     }

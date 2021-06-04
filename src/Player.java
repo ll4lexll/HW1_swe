@@ -8,9 +8,19 @@ public class Player {
         this.win_deck = new Deck(false);
     }
 
-    public String setName(String name) { //set player name
-        this.name = name;
+    public String get_name(){
+        return this.name;
     }
+//    public Deck getDraw_deck(){
+//        return this.draw_deck;
+//    }
+//    public Deck getwin_deck(){
+//        return this.win_deck;
+//    }
+
+    public void setName(String name) { //set player name
+        this.name = name;
+    } // Chenges were made here
 
     public String toString() {
         return this.name;
@@ -19,10 +29,17 @@ public class Player {
     public boolean outOfCards() { //check if the player has no cards
         if (this.draw_deck.isEmpty() && this.win_deck.isEmpty())
             return true;
+        return false; // Chenges were made here
     }
 
     public Card drawCard(){ //remove the top card from the draw deck and returns it
-        this.draw_deck.removeTopCard();
+        if(this.draw_deck.isEmpty()){
+            Deck winDeck = this.win_deck;
+            winDeck.shuffle();
+            while (!winDeck.isEmpty())
+                this.toDraw(winDeck.removeTopCard());
+        }
+        return this.draw_deck.removeTopCard();// Chenges were made here
     }
 
     public void toDraw(Card card){ //adds a card to the draw deck
