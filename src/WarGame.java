@@ -3,6 +3,19 @@ public class WarGame {
     private Player player2;
 
     public WarGame(String name1, String name2){
+        int order = name1.compareTo(name2);
+        switch (order){
+            case 1:{
+                this.player1 = new Player(name2);
+                this.player2 = new Player(name1);
+                return;
+            }
+            default:{
+                this.player1 = new Player(name1);
+                this.player2 = new Player(name2);
+                break;
+            }
+        }
         this.player1 = new Player(name1);
         this.player2 = new Player(name2);
     }
@@ -14,6 +27,7 @@ public class WarGame {
     }
 
     public void initializeGame(){
+        System.out.println("Initializing the game...");
         Deck init_deck = new Deck(true);
         init_deck.shuffle();
         int order = this.player1.get_name().compareTo(
@@ -38,6 +52,7 @@ public class WarGame {
 
     }
     public String start(){
+        this.initializeGame();
         Deck temp_deck = new Deck(false);
         int war_counter = 0;
         while (!this.player1.outOfCards() && !this.player2.outOfCards()){
