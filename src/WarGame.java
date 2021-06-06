@@ -19,12 +19,6 @@ public class WarGame {
         this.player1 = new Player(name1);
         this.player2 = new Player(name2);
     }
-    public Player get_player1(){
-        return this.player1;
-    }
-    public Player get_player2(){
-        return this.player2;
-    }
 
     public void initializeGame(){
         System.out.println("Initializing the game...");
@@ -55,7 +49,9 @@ public class WarGame {
         this.initializeGame();
         Deck temp_deck = new Deck(false);
         int war_counter = 0;
+        int round_counter = 0;
         while (!this.player1.outOfCards() && !this.player2.outOfCards()){
+            System.out.println("------------------------- Round number 1 -------------------------");
             Card p1_card = this.player1.drawCard();
             Card p2_card = this.player2.drawCard();
             if(war_counter > 0){
