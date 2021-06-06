@@ -91,8 +91,8 @@ public class WarGame {
             switch (p1_card.compare(p2_card)){
                 case 1:{
                     System.out.println(this.player1.toString()+" won");
-                    this.player1.toWin(p1_card);
                     this.player1.toWin(p2_card);
+                    this.player1.toWin(p1_card);
                 }
                 break;
                 case -1:{
@@ -109,10 +109,10 @@ public class WarGame {
                 }
             }
 
-            if (p1_card.compare(p2_card) == 1) {
-                this.player1.toWin(p1_card);
-                this.player1.toWin(p2_card);
-            }
+//            if (p1_card.compare(p2_card) == 1) {
+//                this.player1.toWin(p1_card);
+//                this.player1.toWin(p2_card);
+//            }
 
         }
         if(this.player1.outOfCards()){
