@@ -4,13 +4,12 @@ public class Player {
     private Deck win_deck;
 
     public Player(String name) {  //building a new player with empty decks
+        this.name = name;
         this.draw_deck = new Deck(false);
         this.win_deck = new Deck(false);
     }
 
-    public String get_name(){
-        return this.name;
-    }
+
 //    public Deck getDraw_deck(){
 //        return this.draw_deck;
 //    }
@@ -34,12 +33,11 @@ public class Player {
 
     public Card drawCard(){ //remove the top card from the draw deck and returns it
         if(this.draw_deck.isEmpty()){
-            Deck winDeck = this.win_deck;
-            winDeck.shuffle();
-            while (!winDeck.isEmpty())
-                this.toDraw(winDeck.removeTopCard());
+            this.win_deck.shuffle();
+            this.draw_deck = this.win_deck;
+            this.win_deck = new Deck(false);
         }
-        return this.draw_deck.removeTopCard();// Chenges were made here
+        return this.draw_deck.removeTopCard();
     }
 
     public void toDraw(Card card){ //adds a card to the draw deck

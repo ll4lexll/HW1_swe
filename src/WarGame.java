@@ -24,24 +24,10 @@ public class WarGame {
         System.out.println("Initializing the game...");
         Deck init_deck = new Deck(true);
         init_deck.shuffle();
-        int order = this.player1.get_name().compareTo(
-                this.player2.get_name()
-        );
-        switch (order){ // even number of cards at the beginning
-            case 1:{ // player 2 is first
-                while (!init_deck.isEmpty()){
-                    this.player2.toDraw(init_deck.removeTopCard());
-                    this.player1.toDraw(init_deck.removeTopCard());
-                }
-            }
-            break;
-            default:{
-                while (!init_deck.isEmpty()){
-                    this.player1.toDraw(init_deck.removeTopCard());
-                    this.player2.toDraw(init_deck.removeTopCard());
-                }
-            }
-            break;
+
+        while (!init_deck.isEmpty()){
+            this.player1.toDraw(init_deck.removeTopCard());
+            this.player2.toDraw(init_deck.removeTopCard());
         }
 
     }
@@ -51,54 +37,72 @@ public class WarGame {
         int war_counter = 0;
         int round_counter = 0;
         while (!this.player1.outOfCards() && !this.player2.outOfCards()){
-            System.out.println("------------------------- Round number 1 -------------------------");
-            Card p1_card = this.player1.drawCard();
-            Card p2_card = this.player2.drawCard();
-            if(war_counter > 0){
-                temp_deck.addCard(p1_card);
-                temp_deck.addCard(p2_card);
+            round_counter += 1;
+            if (war_counter > 0){
+                if( war_counter < 3) {
+                    Card p1_card = this.player1.drawCard();
+                    System.out.println(player1.toString() + " drew a war card");
+                    temp_deck.addCard(p1_card);
+                    Card p2_card = this.player2.drawCard();
+                    System.out.println(player2.toString() + " drew a war card");
+                    temp_deck.addCard(p2_card);
+                }
+
+                if(war_counter == 3) {
+                    Card p1_card = this.player1.drawCard();
+                    System.out.println(player1.toString() + " drew " + p1_card.toString());
+                    Card p2_card = this.player2.drawCard();
+                    System.out.println(player2.toString() + " drew " + p2_card.toString());
+                    switch (p1_card.compare(p2_card)){
+                        case 1:{
+                            while (!temp_deck.isEmpty())
+                                this.player1.toWin(temp_deck.removeTopCard());
+                            System.out.println(this.player1.toString()+" won the war");
+                            war_counter = 0;
+                            continue;
+                        }
+                        case -1:{
+                            while (!temp_deck.isEmpty())
+                                this.player2.toWin(temp_deck.removeTopCard());
+                            System.out.println(this.player2.toString()+" won the war");
+                            war_counter = 0;
+                            continue;
+                        }
+                        case 0:{
+                            System.out.println("Starting a war...");
+                            temp_deck.addCard(p1_card);
+                            temp_deck.addCard(p2_card);
+                            war_counter = 1;
+                            continue;
+                        }
+                    }
+                }
+
                 war_counter+=1;
                 continue;
             }
-            if(war_counter == 3) {
-                switch (p1_card.compare(p2_card)){
-                    case 1:{
-                        while (!temp_deck.isEmpty())
-                            this.player1.toWin(temp_deck.removeTopCard());
-                        this.player1.toWin(p1_card);
-                        this.player1.toWin(p2_card);
-                        war_counter = 0;
-                        continue;
-                    }
-                    case -1:{
-                        while (!temp_deck.isEmpty())
-                            this.player2.toWin(temp_deck.removeTopCard());
-                        this.player2.toWin(p1_card);
-                        this.player2.toWin(p2_card);
-                        war_counter = 0;
-                        continue;
-                    }
-                    case 0:{
-                        temp_deck.addCard(p1_card);
-                        temp_deck.addCard(p2_card);
-                        war_counter = 1;
-                        continue;
-                    }
-                }
-            }
+            System.out.println("------------------------- Round number " + round_counter + " -------------------------");
+            Card p1_card = this.player1.drawCard();
+            System.out.println(player1.toString() + " drew " + p1_card.toString());
+            Card p2_card = this.player2.drawCard();
+            System.out.println(player2.toString() + " drew " + p2_card.toString());
+
 
             switch (p1_card.compare(p2_card)){
                 case 1:{
+                    System.out.println(this.player1.toString()+" won");
                     this.player1.toWin(p1_card);
                     this.player1.toWin(p2_card);
                 }
                 break;
                 case -1:{
+                    System.out.println(this.player2.toString()+" won");
                     this.player2.toWin(p1_card);
                     this.player2.toWin(p2_card);
                 }
                 break;
                 case 0:{
+                    System.out.println("Starting a war...");
                     temp_deck.addCard(p1_card);
                     temp_deck.addCard(p2_card);
                     war_counter = 1;
@@ -112,10 +116,10 @@ public class WarGame {
 
         }
         if(this.player1.outOfCards()){
-            return this.player1.get_name();
+            return this.player1.toString();
         }
         else {
-            return this.player2.get_name();
+            return this.player2.toString();
         }
     }
 }

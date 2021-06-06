@@ -42,7 +42,6 @@ public class Deck {
     }
     public void shuffle(){
         Random rnd = Main.rnd;
-        rnd = new Random();
         for (int i=0; i<50; i++){
             int index1 = 0;
             int index2 = 0;
