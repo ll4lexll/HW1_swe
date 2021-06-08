@@ -34,8 +34,13 @@ public class Player {
     public Card drawCard(){ //remove the top card from the draw deck and returns it
         if(this.draw_deck.isEmpty()){
             this.win_deck.shuffle();
+//            while (!this.win_deck.isEmpty()){
+//                this.draw_deck.addCard(this.win_deck.removeTopCard());
+//            }
             this.draw_deck = this.win_deck;
             this.win_deck = new Deck(false);
+//            this.draw_deck.get_cardsArray().addAll(this.win_deck.get_cardsArray());
+//            this.win_deck = new Deck(false);
         }
         return this.draw_deck.removeTopCard();
     }

@@ -45,11 +45,10 @@ public class Deck {
         for (int i=0; i<50; i++){
             int index1 = 0;
             int index2 = 0;
-            // we want index1 to be the first to pop from the deck
-            while (index1 == index2){
-                index1 = rnd.nextInt(this.cards.size());
-                index2 = rnd.nextInt(this.cards.size());
-            }
+//            while (index1 == index2){
+            index1 = rnd.nextInt(this.cards.size());
+            index2 = rnd.nextInt(this.cards.size());
+//            }
             Card temp1 = this.cards.get(index1);
             Card temp2 = this.cards.get(index2);
             this.cards.set(index2, temp1);
